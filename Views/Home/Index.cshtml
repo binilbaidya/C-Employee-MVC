@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>AzrachIT</h1>
+    <p class="lead">We use ASP.NET web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="@Url.Action("Index", "Employees")" class="btn btn-primary btn-lg">Meet Our Team &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            Nam viverra gravida condimentum. Sed non nisi vulputate, fermentum nulla at, pharetra massa. Mauris eros justo, blandit vitae tristique sed, maximus quis massa. Fusce mollis maximus aliquet. Vivamus tristique nisi ut ante rutrum, et tempus velit tempus. Curabitur at malesuada magna. Praesent porttitor gravida erat sit amet consectetur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam in sem lectus. Aenean facilisis lorem vel accumsan tincidunt.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Contact Us</h2>
+        <p>Mauris sagittis egestas velit et rutrum. Sed ac feugiat neque, sit amet fermentum sapien. Duis commodo faucibus tellus, sed lacinia erat aliquet at. Curabitur suscipit pellentesque mauris, at ultricies tellus varius eget. Ut quis tempor dui. Phasellus at tellus iaculis, vehicula odio eu, viverra risus. Vivamus hendrerit, ipsum ut sodales pulvinar, sapien ipsum porttitor orci, at dignissim turpis ligula sit amet est.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Contact", "Home")">Contact &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Learn More About Us</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="@Url.Action("About", "Home")">About &raquo;</a></p>
+    </div>
+</div>

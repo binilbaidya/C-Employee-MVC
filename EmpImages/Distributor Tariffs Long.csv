@@ -1,0 +1,2 @@
+﻿Country,DistributorId,DistributorName,TariffName,MaxUsageKwh,DemandUnit,IsActive,IsBusiness,IsDemand,IsHighVoltage,IsOpen,StartDate,TermMonth,UsageTypeMask,DemandMinThreshold,CapacityMinThreshold,UsageSystem,LineItemType,TimeOfUse,Band,MaxUnit,Price
+NZ,KIPT,Kiwi Income Properties Trust,,,Kw,1,1,0,0,1,1/1/2014,1,,,,kWh,,,,,

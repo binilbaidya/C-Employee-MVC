@@ -1,0 +1,159 @@
+﻿@using CRUDEmployeeMVC.Model;
+@model IEnumerable<CRUDEmployeeMVC.Model.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Pagination pagination = new Pagination();
+    int pageNo = 0;
+    if (ViewBag.Pagination != null)
+    {
+        pagination = ViewBag.Pagination;
+        pageNo = pagination.CurrentPage;
+    }
+}
+
+<table class="table" id="empTable">
+    <tr>
+        <th>
+            @Html.ActionLink("Full Name", "Index", new { page = 1, empFilter = Request.QueryString["empFilter"], sortBy = ViewBag.SortByName, searchQuery = Request.QueryString["searchQuery"] })
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Gender)
+        </th>
+        <th>Actions</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.ProfilePic)" width="40" height="40" style="border-radius: 50%" />
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @if (item.EmpDoc == "/EmpDocs/no-document.png")
+                {
+                    <a class="btn btn-primary btn-sm" title="No Documents Available"><i class="fa fa-ban"></i></a>
+                }
+                else
+                {
+                    <a data-toggle="modal" data-target="#myModal_@item.ID" class="btn btn-primary btn-sm" title="@Html.DisplayFor(modelItem => item.FullName)'s Documents"><i class="fa fa-download"></i></a>
+                }
+                <a href="@Url.Action("Edit", "Employees", new { id = item.ID })" class="btn btn-success btn-sm">Edit</a>
+                <a href="@Url.Action("Details", "Employees", new { id = item.ID })" class="btn btn-default btn-sm">Details</a>
+                @if (item.IsDeleted == false)
+                {
+                    <a href="@Url.Action("Delete", "Employees", new { id = item.ID })" class="btn btn-danger btn-sm">Delete</a>
+                }
+            </td>
+        </tr>
+        <div id="myModal_@item.ID" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">@Html.DisplayFor(modelItem => item.FullName)'s Documents</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="list-emp-docs_@item.ID">
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script>
+            $(function () {
+                let stringOfDocs = `@Html.DisplayFor(modelItem => item.EmpDoc)`;
+                const listOfDocs = stringOfDocs.split(", ");
+                for (i = 0; i < listOfDocs.length; i++) {
+                    const properName = listOfDocs[i].split("/").pop();
+                    console.log(properName);
+                    var obj = listOfDocs[i];
+                    $("#list-emp-docs_"+`@item.ID`).after(`<li style="margin-top: 10px;"><a href="` + obj + `" download="@Html.DisplayFor(modelItem => item.FullName)_doc" title = "Download @Html.DisplayFor(modelItem => item.FullName)'s Document">` + properName + `</a></li>`);
+                }
+            })
+        </script>
+    }
+
+</table>
+
+@Html.Partial("_Pagination", pagination)
+<script>
+    function callChange(val) {
+        var url = 'Employees?searchQuery=' + $("#empSearch").val() + '&empFilter=' + $("#empFilter").val();
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: (data) => {
+                $('#empTable').empty()
+                $('#empTable').append($(data).find('#empTable').html())
+                $('#pagination').empty()
+                $('#pagination').append($(data).find('#pagination').html())
+            }
+        })
+    }
+
+    function searchEmp(val) {
+        var url = 'Employees?searchQuery=' + $("#empSearch").val() + '&empFilter=' + $("#empFilter").val();
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: (data) => {
+                $('#empTable').empty()
+                $('#empTable').append($(data).find('#empTable').html())
+                $('#pagination').empty()
+                $('#pagination').append($(data).find('#pagination').html())
+            }
+        })
+    }
+
+    function ajax_pagination() {
+        $('#pagination ul li.page-item a.page-link').each((index, el) => {
+            $(el).click((e) => {
+                e.preventDefault()
+                let page_url = $(el).attr('href')
+                $.ajax({
+                    url: page_url,
+                    type: "GET",
+                    success: (data) => {
+                        $('#empTable').empty()
+                        $('#empTable').append($(data).find('#empTable').html())
+                        $('#pagination').empty()
+                        $('#pagination').append($(data).find('#pagination').html())
+                    }
+                })
+            })
+        })
+    }
+
+    $(document).ready(function () {
+        ajax_pagination();
+    })
+
+    $(document).ajaxStop(function () {
+        ajax_pagination();
+    })
+
+
+</script>

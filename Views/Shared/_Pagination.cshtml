@@ -1,0 +1,30 @@
+﻿@model CRUDEmployeeMVC.Model.Pagination
+
+<div class="container text-center" id="pagination">
+    @if (Model.TotalPages > 0)
+    {
+        <ul class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Employees" asp-action="Index" href="@Url.Action("Index", "Employees", new { page = 1, empFilter = Request.QueryString["empFilter"], sortBy = Request.QueryString["sortBy"], searchQuery = Request.QueryString["searchQuery"]})"> First </a>
+                </li>
+            }
+
+            @for (var page = Model.StartPage; page <= Model.EndPage; page++)
+            {
+                <li class="page-item @(page == Model.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-controller="Employees" asp-action="Index" href="@Url.Action("Index", "Employees", new { page = @page, empFilter = Request.QueryString["empFilter"], sortBy = Request.QueryString["sortBy"], searchQuery = Request.QueryString["searchQuery"]})"> @page </a>
+                </li>
+            }
+
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Employees" asp-action="Index" href="@Url.Action("Index", "Employees", new { page = @Model.TotalPages, empFilter = Request.QueryString["empFilter"], sortBy = Request.QueryString["sortBy"], searchQuery = Request.QueryString["searchQuery"]})"> Last </a>
+                </li>
+            }
+
+        </ul>
+    }
+</div>

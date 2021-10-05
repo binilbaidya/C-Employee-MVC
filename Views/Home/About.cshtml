@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "About Page";
+}
+
+@section Styles{
+    <style type="text/css">
+        .card {
+            border: 1px solid rgb(128, 128, 128, 0.4);
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+            transition: 0.2s;
+            padding: 20px;
+        }
+        .card:hover {
+            box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+        }
+    </style>
+}
+
+<h2 class="text-center"><b>@ViewBag.Title</b></h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="card">
+    <p>This web application is made just to store, view, edit and delete employees informations.</p>
+    <p>Fusce in metus vitae quam mattis tristique nec sit amet urna. Sed in erat neque. Quisque ullamcorper, risus in aliquam dictum, metus turpis placerat nunc, pulvinar imperdiet justo purus et diam. Curabitur dignissim laoreet felis vitae gravida. Sed vel tincidunt risus. Aenean tempor dignissim lacus nec condimentum. Etiam fringilla vestibulum dolor, vitae euismod nibh vehicula vitae. Maecenas elementum sapien nec tortor dignissim vestibulum. In hac habitasse platea dictumst. Aenean quis sodales sapien, in suscipit arcu. Cras nec vulputate eros. Vivamus volutpat enim imperdiet ligula lobortis, egestas pulvinar lacus blandit.</p>
+</div>

@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "List of Employees";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        td:not(:first-child, :last-child) {
+            padding-top: 15px !important;
+        }
+
+    </style>
+}
+
+<div class="row">
+    <h2 class="col-md-4">List of Employees</h2>
+
+    <div class="col-md-3 form-inline" style="margin-top: 18px">
+        <label style="font-weight: normal">Search: </label>
+        <input type="text" placeholder="Enter Employees Name" class="form-control" id="empSearch" onkeyup="searchEmp(this.value)" />
+    </div>
+
+    <div class="col-md-3 form-inline" style="margin-top: 18px">
+        <label style="font-weight: normal">Filter by: </label>
+        @Html.DropDownList("EmpFilters", (IEnumerable<SelectListItem>)ViewData["EmpFilters"], Request.QueryString["empFilter"], new { @class = "form-control", @id = "empFilter", @onchange = "callChange(this.value)" })
+    </div>
+
+    <p class="col-md-2">
+        <a href="@Url.Action("Create", "Employees")" class="btn btn-primary" style="margin-top: 18px">Add Employee</a>
+    </p>
+
+</div>
+
+@Html.Partial("_EmployeesList")

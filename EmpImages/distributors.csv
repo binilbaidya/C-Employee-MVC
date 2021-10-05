@@ -1,0 +1,2 @@
+Country,DistributorId,DistributorName,TariffName,MaxUsageKwh,DemandUnit,StartDate,TermMonth,UsageTypeMask,UsageSystem,LineItemType,TimeOfUse,Band,MaxUnit,Price
+NZ,KIPT,Kiwi Income Properties Trust,Gen,160000,,1/1/2021,1,AU-ELEC-ACT,Nuos,Energy,Peak,1,9999,11
