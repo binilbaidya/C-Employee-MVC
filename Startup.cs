@@ -1,5 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using Autofac;
+using Microsoft.Owin;
 using Owin;
+using System;
 
 [assembly: OwinStartupAttribute(typeof(CRUDEmployeeMVC.Startup))]
 namespace CRUDEmployeeMVC
@@ -8,6 +10,9 @@ namespace CRUDEmployeeMVC
     {
         public void Configuration(IAppBuilder app)
         {
+            var builder = new ContainerBuilder();
+            var container = builder.Build();
+            app.UseAutofacMiddleware(container);
             ConfigureAuth(app);
         }
     }
