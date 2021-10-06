@@ -8,7 +8,7 @@
       NHibernate.Driver.SqlClientDriver
     </property>
     <property name="connection.connection_string">
-      Server=(local);database=LocalDatabase;Integrated Security=SSPI;
+      Server=(local);database=PracticeNET;Integrated Security=SSPI;
     </property>
     <property name="dialect">
       NHibernate.Dialect.MsSql2012Dialect
